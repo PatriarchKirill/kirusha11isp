@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta author="Svita">
+  <title>Тест по Бэтмену</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="slides" id="slides">
+      <!-- Слайд 1 -->
+      <div class="slide" id="slide1">
+        <h2>Форма авторизации</h2>
+        <label for="name">Имя:</label>
+        <input type="text" id="name" placeholder="Ваше имя">
+        <span class="error" id="nameError" style="color: red;"></span>
+        
+        <label for="birthDate">Дата рождения:</label>
+        <input type="date" id="birthDate">
+        <span class="error" id="birthDateError" style="color: red;"></span>
+        
+        <p>Пол:</p>
+        <label><input type="radio" name="gender" value="М"> Мужской</label>
+        <label><input type="radio" name="gender" value="Ж"> Женский</label>
+        <span class="error" id="genderError" style="color: red;"></span>
+        
+        <button id="next1">Ввод</button>
+      </div>
+
+      <!-- Слайд 2 -->
+      <div class="slide" id="slide2">
+        <h2>Тест по Бэтмену</h2>
+
+        <p>1. Как зовут самого известного противника Бэтмена?</p>
+        <input type="text" id="q1">
+        <span class="error" id="q1Error"></span>
+
+        <p>2. Где расположен город Готэм?</p>
+        <input type="text" id="q2">
+        <span class="error" id="q2Error"></span>
+
+        <p>3. Кто является помощником Бэтмена и носит имя Робин?</p>
+        <label><input type="radio" name="q3" value="Дик Грейсон"> Дик Грейсон</label>
+        <label><input type="radio" name="q3" value="Тим Дрейк"> Тим Дрейк</label>
+        <label><input type="radio" name="q3" value="Джейсон Тодд"> Джейсон Тодд</label>
+        <span class="error" id="q3Error"></span>
+
+        <p>4. Какой символ изображён на костюме Бэтмена?</p>
+        <label><input type="radio" name="q4" value="Сова"> Сова</label>
+        <label><input type="radio" name="q4" value="Бэт-символ"> Бэт-символ</label>
+        <label><input type="radio" name="q4" value="Летучая мышь"> Летучая мышь</label>
+        <span id="q4Error" class="error"></span>
+
+        <p>5. Как называется главный транспорт Бэтмена?</p>
+        <label><input type="radio" name="q5" value="Бэтмобиль"> Бэтмобиль</label>
+        <label><input type="radio" name="q5" value="Бэтмотоцикл"> Бэтмотоцикл</label>
+        <label><input type="radio" name="q5" value="Бэтплан"> Бэтплан</label>
+        <span id="q5Error" class="error"></span>
+
+        <p>6. Кто из героев является главным союзником Бэтмена в борьбе с преступностью?</p>
+        <label><input type="radio" name="q6" value="Супермен"> Супермен</label>
+        <label><input type="radio" name="q6" value="Чудо-женщина"> Чудо-женщина</label>
+        <label><input type="radio" name="q6" value="Джеймс Гордон"> Джеймс Гордон</label>
+        <span id="q6Error" class="error"></span>
+
+        <div class="pagination">
+          <button id="prev2">Обратно</button>
+          <button id="next2">Проверка</button>
+        </div>
+      </div>
+
+      <!-- Слайд 3 -->
+      <div class="slide" id="slide3">
+        <h2>Результат</h2>
+        <p id="resultText"></p>
+        <button id="restart">Заново</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

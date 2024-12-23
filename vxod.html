@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .auth-form, .welcome {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            height: 300px;
+            text-align: center;
+        }
+        .auth-form input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .auth-form button {
+            padding: 10px;
+            background-color: grey;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            transform: translate(0,015px);
+            -webkit-transform: translate(0,015px);
+            -o-transform: translate(0,015px);
+            -moz-transform: translate(0,015px);
+            cursor: pointer;
+        }
+        .auth-form button:hover {
+            background-color: black;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -8px;
+        }
+        .welcome p {
+            font-size: 18px;
+        }
+        .welcome button {
+            margin-top: 20px;
+        }
+        #content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="auth-form" class="auth-form">
+    <h2>Форма авторизации</h2>
+    <form id="loginForm">
+        <input type="text" id="login" name="login" placeholder="Логин (4-10 символов)" required>
+        <div id="loginError" class="error"></div>
+        
+        <input type="date" id="dob" name="dob" required>
+        <div id="dobError" class="error"></div>
+
+        <label>Пол:</label><br>
+        <input type="radio" id="male" name="gender" value="Мужской" required> Мужской
+        <input type="radio" id="female" name="gender" value="Женский" required> Женский
+        <div id="genderError" class="error"></div>
+        
+        <button type="submit">Авторизоваться</button>
+    </form>
+</div>
+
+<div id="welcome" class="welcome" style="display: none;">
+    <p>Добро пожаловать, <span id="username"></span>!</p>
+    <button id="logout">Выйти</button>
+</div>
+
+<div id="content">
+    <h1>Секретная страница</h1>
+    <p>Доступ разрешён только авторизованным пользователям.</p>
+</div>
+
+<script>
+    const loginForm = document.getElementById('loginForm');
+    const authForm = document.getElementById('auth-form');
+    const welcome = document.getElementById('welcome');
+    const username = document.getElementById('username');
+    const logoutButton = document.getElementById('logout');
+    const content = document.getElementById('content');
+    
+    const loginInput = document.getElementById('login');
+    const dobInput = document.getElementById('dob');
+    const genderInput = document.getElementsByName('gender');
+    
+    const loginError = document.getElementById('loginError');
+    const dobError = document.getElementById('dobError');
+    const genderError = document.getElementById('genderError');
+    
+    const currentDate = new Date().toISOString().split('T')[0];
+
+    function validateForm(event) {
+        event.preventDefault();
+        let valid = true;
+
+        // Reset errors
+        loginError.textContent = '';
+        dobError.textContent = '';
+        genderError.textContent = '';
+
+        const loginValue = loginInput.value;
+        const dobValue = dobInput.value;
+        const genderValue = Array.from(genderInput).find(input => input.checked)?.value;
+
+        // Validate login
+        const loginRegex = /^[а-яА-ЯёЁ0-9]{4,10}$/;
+        if (!loginValue.match(loginRegex)) {
+            loginError.textContent = 'Логин должен содержать от 4 до 10 символов и включать только русские буквы и цифры.';
+            valid = false;
+        }
+
+        // Validate date of birth
+        if (!dobValue || dobValue > currentDate || dobValue < '1950-01-01') {
+            dobError.textContent = 'Дата рождения должна быть не раньше 1950 года и не позже сегодняшней даты.';
+            valid = false;
+        }
+
+        // Validate gender
+        if (!genderValue) {
+            genderError.textContent = 'Выберите пол.';
+            valid = false;
+        }
+
+        if (valid) {
+            // Store login in localStorage to persist after reload
+            localStorage.setItem('username', loginValue);
+            authForm.style.display = 'none';
+            welcome.style.display = 'block';
+            username.textContent = loginValue;
+            content.style.display = 'block';  // Open content
+
+            // Redirect to index.html after successful login
+            window.location.href = 'index.html';
+        }
+    }
+
+    function logout() {
+        // Remove user data and return to login form
+        localStorage.removeItem('username');
+        authForm.style.display = 'block';
+        welcome.style.display = 'none';
+        content.style.display = 'none';
+        loginForm.reset();
+    }
+
+    // On page load, check if the user is already logged in
+    if (localStorage.getItem('username')) {
+        authForm.style.display = 'none';
+        welcome.style.display = 'block';
+        username.textContent = localStorage.getItem('username');
+        content.style.display = 'block';
+    }
+
+    loginForm.addEventListener('submit', validateForm);
+    logoutButton.addEventListener('click', logout);
+</script>
+
+</body>
+</html>
