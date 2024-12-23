@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .user-info {
+            margin-bottom: 20px;
+        }
+        .user-info p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .logout-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+        .logout-button:hover {
+            background-color: #ff3333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Личный кабинет</h1>
+
+        <div class="user-info">
+            <p><strong>Имя пользователя:</strong> Иван Иванов</p>
+            <p><strong>Email:</strong> ivan.ivanov@example.com</p>
+            <p><strong>Последний тест:</strong> Betman Тёмный рыцарь</p>
+            <p><strong>Результат последнего теста:</strong> 85 баллов</p>
+        </div>
+
+        <button class="logout-button" onclick="logout()">Выход</button>
+    </div>
+
+    <script>
+        function logout() {
+            // Реализуйте логику выхода, например, очистка сессии или редирект на страницу входа
+            alert('Вы успешно вышли!');
+            window.location.href = 'login.html'; // Перенаправление на страницу авторизации
+        }
+    </script>
+
+</body>
+</html>
